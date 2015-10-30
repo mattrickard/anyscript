@@ -1,0 +1,186 @@
+#!./anyscript -lignite
+
+// testanyscript
+// Copyright (C) 2015 Matthew Rickard
+
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+// vim: syntax=cpp
+
+#include <stdio.h>
+#include "UnitTest.h"
+#include "AbstractProcess.h"
+#include "unistd.h"
+#include "diff.h"
+
+class AnyscriptTest1: public UnitTest {
+  void run() {
+    Process p("./checkanyscript1 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript1.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript1.out", p.outputFd), "checkanyscript1.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest2: public UnitTest {
+  void run() {
+    Process p("./checkanyscript2 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript2.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript2.out", p.outputFd), "checkanyscript2.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest1a: public UnitTest {
+  void run() {
+    Process p("./anyscript checkanyscript1 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript1a.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript1a.out", p.outputFd), "checkanyscript1a.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest2a: public UnitTest {
+  void run() {
+    Process p("./anyscript checkanyscript2 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript2a.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript2a.out", p.outputFd), "checkanyscript2a.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest3a: public UnitTest {
+  void run() {
+    Process p("./anyscript checkanyscript3 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript3a.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript3a.out", p.outputFd), "checkanyscript3a.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest1b: public UnitTest {
+  void run() {
+    Process p("./anyscript -Iwinnie -Lpooh checkanyscript1 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript1b.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript1b.out", p.outputFd), "checkanyscript1b.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest2b: public UnitTest {
+  void run() {
+    Process p("./anyscript -Iwinnie -Lpooh checkanyscript2 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript2b.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript2b.out", p.outputFd), "checkanyscript2b.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest3b: public UnitTest {
+  void run() {
+    Process p("./anyscript -Iwinnie -Lpooh checkanyscript3 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript3b.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript3b.out", p.outputFd), "checkanyscript3b.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest3c: public UnitTest {
+  void run() {
+    Process p("./anyscript -Iwinnie checkanyscript3 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript3c.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript3c.out", p.outputFd), "checkanyscript3c.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest3d: public UnitTest {
+  void run() {
+    Process p("./anyscript -I winnie checkanyscript3 Arg1 Arg2 Arg3"); // now to complicate matters
+    p.setOutput("checkanyscript3d.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript3d.out", p.outputFd), "checkanyscript3d.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest3e: public UnitTest {
+  void run() {
+    // now to really complicate matters
+    Process p("./anyscript -I checkanyscript2 checkanyscript3 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript3e.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript3e.out", p.outputFd), "checkanyscript3e.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest3f: public UnitTest {
+  void run() {
+    // This can strike the Closing line, if the first option resembles a shebang folded argument
+    Process p("./anyscript -I checkanyscript3 checkanyscript2 Arg1 Arg2 Arg3");
+    p.setOutput("checkanyscript3f.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript3f.out", p.outputFd), "checkanyscript3f.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTest3g: public UnitTest {
+  void run() {
+    // This can strike the Closing line, if the first option resembles a shebang folded argument
+    Process p("./anyscript -I checkanyscript3 checkanyscript2 Arg1 Arg2 Arg3");
+    p.setenv("FAST_SHEBANG_CHECK", "1");
+    p.setOutput("checkanyscript3g.out");
+    testEqual(p.run(), 0);
+    lseek(p.outputFd, 0, SEEK_SET);
+    testDiff(NameAndFile("checkanyscript3g.out", p.outputFd), "checkanyscript3g.exp", DIFF_NORMAL);
+  }
+};
+
+class AnyscriptTestsuite: public UnitTestSuite {
+  void addSubTests() {
+    setenv("ANYSCRIPT_SHOW_OPTIONS", "1", 1);
+    subTests->push_back(new AnyscriptTest1);
+    subTests->push_back(new AnyscriptTest2);
+    subTests->push_back(new AnyscriptTest1a);
+    subTests->push_back(new AnyscriptTest2a);
+    subTests->push_back(new AnyscriptTest1b);
+    subTests->push_back(new AnyscriptTest2b);
+    subTests->push_back(new AnyscriptTest3a);
+    subTests->push_back(new AnyscriptTest3b);
+    subTests->push_back(new AnyscriptTest3c);
+    subTests->push_back(new AnyscriptTest3d);
+    subTests->push_back(new AnyscriptTest3e);
+    subTests->push_back(new AnyscriptTest3f);
+    subTests->push_back(new AnyscriptTest3g);
+  }
+};
+
+int main(int argc, char *argv[]) {
+  AnyscriptTestsuite uts;
+  Scorecard sc;
+  return sc.examine(uts, argc, argv);
+}
+

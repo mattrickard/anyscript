@@ -1,0 +1,10 @@
+argc = 5
+argv[0] = ./anyscript
+argv[1] = checkanyscript3
+argv[2] = Arg1
+argv[3] = Arg2
+argv[4] = Arg3
+Trying to open checkanyscript3
+There's an open file here ... optionGetter.optind = 1
+That's all right then
+Hello from checkanyscript3, your args are: ./checkanyscript3-x Arg1 Arg2 Arg3

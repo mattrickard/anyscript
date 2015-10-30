@@ -1,0 +1,9 @@
+argc = 5
+argv[0] = ./anyscript
+argv[1] = ./checkanyscript1
+argv[2] = Arg1
+argv[3] = Arg2
+argv[4] = Arg3
+Trying to open ./checkanyscript1
+shebangline = #!./anyscript
+Hello from checkanyscript1, your args are: ./checkanyscript1-x Arg1 Arg2 Arg3

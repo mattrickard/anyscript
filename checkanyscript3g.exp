@@ -1,0 +1,15 @@
+argc = 7
+argv[0] = ./anyscript
+argv[1] = -I
+argv[2] = checkanyscript3
+argv[3] = checkanyscript2
+argv[4] = Arg1
+argv[5] = Arg2
+argv[6] = Arg3
+Trying to open checkanyscript3
+Include folder checkanyscript3
+There's an open file here ... optionGetter.optind = 3
+Closing it.
+This is a second open. name = checkanyscript2
+Trying to open checkanyscript2
+Hello from checkanyscript2, your args are: ./checkanyscript2-x Arg1 Arg2 Arg3

@@ -1,0 +1,3 @@
+
+include anyscript.mk
+

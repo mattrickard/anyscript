@@ -1,0 +1,10 @@
+argc = 6
+argv[0] = ./anyscript
+argv[1] = -Iwinnie
+argv[2] = checkanyscript3
+argv[3] = Arg1
+argv[4] = Arg2
+argv[5] = Arg3
+Include folder winnie
+Trying to open checkanyscript3
+Hello from checkanyscript3, your args are: ./checkanyscript3-x Arg1 Arg2 Arg3

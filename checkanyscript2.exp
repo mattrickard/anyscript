@@ -1,0 +1,12 @@
+argc = 6
+argv[0] = ./anyscript
+argv[1] = -Isomeincludedir -Lsomelibdir
+argv[2] = ./checkanyscript2
+argv[3] = Arg1
+argv[4] = Arg2
+argv[5] = Arg3
+Trying to open ./checkanyscript2
+shebangline = #!./anyscript -Isomeincludedir -Lsomelibdir
+Include folder someincludedir
+Library folder somelibdir
+Hello from checkanyscript2, your args are: ./checkanyscript2-x Arg1 Arg2 Arg3
